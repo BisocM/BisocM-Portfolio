@@ -63,10 +63,10 @@ function Header() {
                         <a
                             key={section}
                             href={`#${section.toLowerCase()}`}
-                            className="text-gray-300 hover:text-indigo-400 transition-colors py-2"
-                            onClick={() => setMenuOpen(false)}
+                            className="text-gray-300 hover:text-indigo-400 transition-all duration-300 ease-in-out relative group"
                         >
                             {section}
+                            <span className="absolute left-0 bottom-[-2px] w-0 h-[2px] bg-indigo-400 group-hover:w-full transition-all duration-300 ease-in-out" />
                         </a>
                     ))}
                 </nav>
@@ -123,7 +123,7 @@ interface AchievementCardProps {
 
 function AchievementCard({ title, description, link, imgSrc }: AchievementCardProps) {
     return (
-        <div className="group relative min-w-[250px] max-w-xs bg-[#232442] rounded-lg shadow-md flex-shrink-0 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl cursor-pointer">
+        <div className="group relative min-w-[250px] max-w-xs bg-[#232442] rounded-lg shadow-md flex-shrink-0 overflow-hidden transform transition-all duration-300 ease-in-out hover:scale-105 hover:-translate-y-2 hover:shadow-2xl cursor-pointer" style={{ willChange: 'transform, opacity' }}>
             {/* Animated Background Gradient Layer */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none"></div>
 
@@ -134,10 +134,9 @@ function AchievementCard({ title, description, link, imgSrc }: AchievementCardPr
                     <img
                         src={imgSrc}
                         alt={title}
-                        className="h-full w-full object-cover object-center transform transition-transform duration-300 group-hover:scale-110 group-hover:rotate-1"
+                        className="h-full w-full object-cover object-center transform transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:rotate-1"
                     />
-                    {/* Overlay with subtle gradient effect */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black opacity-0 group-hover:opacity-30 transition-opacity duration-300 ease-in-out"></div>
                 </div>
 
                 {/* Card Details */}
@@ -269,13 +268,13 @@ function AchievementsSection() {
                         title="CQRSharp"
                         description="An open-source, lightweight, and attribute-driven CQRS framework for .NET applications."
                         link="https://github.com/BisocM/CQRSharp"
-                        imgSrc="https://github.com/BisocM/CQRSharp/blob/Release/CQRSharp_Icon_Rectangle.png?raw=true"
+                        imgSrc="https://imagedelivery.net/yMVZazkXH-qQOiCSpkNtBA/eb96108a-3d9d-426a-f10e-cde5a420e300/public"
                     />
                     <AchievementCard
                         title="RykeShell"
                         description="A custom Unix shell built entirely in C++, offering users a powerful command-line experience."
                         link="https://github.com/BisocM/RykeShell"
-                        imgSrc="https://github.com/BisocM/RykeShell/blob/master/RykeShell_Rectangle.png?raw=true"
+                        imgSrc="https://imagedelivery.net/yMVZazkXH-qQOiCSpkNtBA/2ee5b2a0-a876-4e04-e17a-c4daef7af800/public"
                     />
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { FaArrowUp, FaLinkedin, FaGithub, FaCogs, FaServer, FaEnvelope } from "react-icons/fa";
+import { FaArrowUp, FaGithub, FaCogs, FaServer, FaEnvelope } from "react-icons/fa";
 import { SiPostgresql, SiFramework, SiGooglecloud, SiDotnet, SiCplusplus, SiJavascript, SiDocker, SiKubernetes } from "react-icons/si";
 import { useState, useEffect } from "react";
 
@@ -54,15 +54,6 @@ function Header() {
                     title="GitHub Profile"
                 >
                     <FaGithub />
-                </a>
-                <a
-                    href="https://www.linkedin.com/in/bisocm/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xl hover:text-indigo-400 transition-transform transform hover:rotate-12"
-                    title="LinkedIn Profile"
-                >
-                    <FaLinkedin />
                 </a>
             </div>
             {/* Mobile Navigation Dropdown */}

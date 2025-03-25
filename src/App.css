@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -27,9 +29,49 @@
   }
 }
 
+/* Simple fade-in animation you can apply to elements */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bounce-in animation */
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Classes to apply fade-in and bounce-in animations */
+.animate-fadeIn {
+  animation: fadeIn 1s ease forwards;
+}
+
+.animate-bounceIn {
+  animation: bounceIn 0.8s forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-slideDown,
-  .animate-fadeIn {
+  .animate-fadeIn,
+  .animate-bounceIn {
     animation: none;
   }
 }

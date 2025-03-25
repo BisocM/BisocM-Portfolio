@@ -53,7 +53,7 @@ button {
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, background-color 0.25s;
 }
 button:hover {
   border-color: #646cff;
@@ -63,6 +63,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* NEW: Slight tweak in light mode for button hover color */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -73,5 +74,8 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+  button:hover {
+    background-color: #e6e6e6;
   }
 }

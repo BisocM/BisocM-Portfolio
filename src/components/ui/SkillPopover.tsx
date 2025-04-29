@@ -26,20 +26,29 @@ export default function SkillPopover({ title, children, small }: SkillPopoverPro
             <button
                 type="button"
                 onClick={() => setOpen(!open)}
-                className={`flex items-center ${small ? "text-xs" : "text-sm"} text-indigo-300 hover:text-indigo-400 focus:outline-none`}
+                className={`
+          flex items-center
+          ${small ? "text-xs" : "text-sm"}
+          text-primary hover:text-primaryLight
+          focus:outline-none
+          transition-colors duration-DEFAULT
+        `}
+                aria-expanded={open}
             >
                 <span>{title}</span>
                 <FiChevronDown
-                    className={`ml-1 transform transition-transform duration-300 ${
-                        open ? "rotate-180" : ""
-                    }`}
+                    className={`ml-1 transform transition-transform duration-DEFAULT ${open ? "rotate-180" : ""}`}
                     size={small ? 12 : 16}
                 />
             </button>
             <div
-                className={`absolute right-0 mt-2 w-48 p-2 bg-gray-800 border border-gray-700 rounded shadow-lg z-10 transition-transform duration-200 origin-top-right ${
-                    open ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"
-                }`}
+                className={`
+          absolute right-0 mt-2 w-48 p-2
+          bg-darkBgAlt border border-gray-700 rounded shadow-lg z-10
+          transition-transform duration-DEFAULT origin-top-right
+          ${open ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"}
+        `}
+                role="menu"
             >
                 {children}
             </div>

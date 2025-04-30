@@ -27,12 +27,12 @@ export default function SkillPopover({ title, children, small }: SkillPopoverPro
                 type="button"
                 onClick={() => setOpen(!open)}
                 className={`
-          flex items-center
-          ${small ? "text-xs" : "text-sm"}
-          text-primary hover:text-primaryLight
-          focus:outline-none
-          transition-colors duration-DEFAULT
-        `}
+                    flex items-center
+                    ${small ? "text-xs" : "text-sm"}
+                    text-primary hover:text-primaryLight
+                    focus:outline-none
+                    transition-colors duration-DEFAULT
+                `}
                 aria-expanded={open}
             >
                 <span>{title}</span>
@@ -43,11 +43,11 @@ export default function SkillPopover({ title, children, small }: SkillPopoverPro
             </button>
             <div
                 className={`
-          absolute right-0 mt-2 w-48 p-2
-          bg-darkBgAlt border border-gray-700 rounded shadow-lg z-10
-          transition-transform duration-DEFAULT origin-top-right
-          ${open ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"}
-        `}
+                    absolute right-0 mt-2 w-48 p-2
+                    bg-white dark:bg-darkBgAlt border border-gray-200 dark:border-gray-700 rounded shadow-lg z-10
+                    transition-transform duration-DEFAULT origin-top-right
+                    ${open ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"}
+                `}
                 role="menu"
             >
                 {children}

@@ -12,11 +12,11 @@ export default function App() {
     return (
         <div
             className="
-        min-h-screen
-        bg-darkBg text-gray-100 dark:bg-white dark:text-gray-900
-        font-sans overflow-x-hidden
-        animate-fadeIn duration-DEFAULT
-      "
+                min-h-screen
+                bg-white text-gray-900
+                dark:bg-darkBg dark:text-gray-100
+                font-sans overflow-x-hidden
+            "
         >
             <Header />
             <main>

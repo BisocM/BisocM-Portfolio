@@ -20,12 +20,12 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
             whileInView="show"
             viewport={{ once: true, amount: 0.1 }}
             variants={container}
-            className="py-12 px-4 md:px-8 bg-darkBgAlt"
+            className="py-12 px-4 md:px-8 bg-white dark:bg-darkBgAlt"
         >
             <div className="
-        mb-2 text-2xl md:text-3xl font-bold text-center
-        text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400
-      ">
+                mb-2 text-2xl md:text-3xl font-bold text-center
+                text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400
+            ">
                 Professional Experience
             </div>
             <p className="text-center text-sm text-gray-400 mb-8">

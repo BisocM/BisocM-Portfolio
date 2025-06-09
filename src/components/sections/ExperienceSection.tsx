@@ -6,7 +6,11 @@ interface ExperienceSectionProps {
     experiences: IExperience[];
 }
 
-const container: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.2 } } };
+const container: Variants = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.2 } },
+};
+
 const item: Variants = {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 120 } },
@@ -22,19 +26,27 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
             variants={container}
             className="py-12 px-4 md:px-8 bg-white dark:bg-darkBgAlt"
         >
-            <div className="
-                mb-2 text-2xl md:text-3xl font-bold text-center
-                text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400
-            ">
+            <h2
+                className="
+          mb-2 text-2xl md:text-3xl font-bold text-center
+          text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400
+        "
+            >
                 Professional Experience
-            </div>
+            </h2>
+
             <p className="text-center text-sm text-gray-400 mb-8">
                 A snapshot of my recent roles and achievements
             </p>
-            <div className="max-w-3xl mx-auto space-y-6">
-                {experiences.map((exp, index) => (
-                    <motion.div key={index} variants={item}>
-                        <ExperienceTimelineItem experience={exp} />
+
+            <div className="max-w-3xl mx-auto -my-6">
+                {experiences.map((exp, i) => (
+                    <motion.div key={i} variants={item}>
+                        <ExperienceTimelineItem
+                            experience={exp}
+                            isFirst={i === 0}
+                            isLast={i === experiences.length - 1}
+                        />
                     </motion.div>
                 ))}
             </div>

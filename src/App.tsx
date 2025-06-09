@@ -3,6 +3,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
+import CompaniesSection from "@/components/sections/CompaniesSection";
 import Footer from "@/components/layout/Footer";
 
 import { projects } from "./data/projects";
@@ -23,6 +24,7 @@ export default function App() {
                 <HeroSection />
                 <SkillsSection />
                 <ProjectsSection achievements={projects} />
+                <CompaniesSection />
                 <ExperienceSection experiences={experiences} />
             </main>
             <Footer />

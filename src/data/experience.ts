@@ -39,9 +39,9 @@ export const experiences: IExperience[] = [
         location: "United Kingdom (Hybrid, Part-Time)",
         details: [
             "Leading ongoing marketing campaigns to boost digital presence",
-            "Developing new features (frontend & backend) to enhance user engagement",
+            "Leading a team on an ambitious modernization project for IAG Cargo "
         ],
-        softSkills: ["Marketing", "Communication"],
-        technicalSkills: ["TypeScript", "React.js", "Node.js", "AWS", "CI/CD Pipelines"],
+        softSkills: ["Marketing", "Leadership", "Coordination", "Communication"],
+        technicalSkills: ["Python", "Java", "GitHub Actions", "CI/CD", "Python Tooling"],
     },
 ];

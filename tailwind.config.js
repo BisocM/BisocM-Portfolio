@@ -19,7 +19,7 @@ module.exports = {
         footerBorder: '#2b2d42',
       },
 
-      //BREAKPOINTS (you can leave defaults or customize)
+      //BREAKPOINTS
       screens: {
         sm: '640px',
         md: '768px',

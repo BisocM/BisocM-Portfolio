@@ -23,8 +23,8 @@ export default function HeroSection() {
             <h1
                 className="
                     text-4xl md:text-5xl font-extrabold mb-4
-                    text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400
-                "
+                    text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent
+                  "
             >
                 BisocM
             </h1>
@@ -36,6 +36,10 @@ export default function HeroSection() {
             >
                 Backend Developer • Embedded Systems • Reverse Engineering
             </p>
+
+            <div className="text-gray-500 dark:text-gray-400 text-sm font-medium">
+                Speaking: <span className="text-gray-700 dark:text-gray-200">Russian(Native)</span>, <span className="text-gray-700 dark:text-gray-200">English (Professional)</span> & <span className="text-gray-700 dark:text-gray-200">Georgian (Limited Working)</span>
+            </div>
         </motion.section>
     );
 }

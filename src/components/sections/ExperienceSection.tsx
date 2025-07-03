@@ -29,7 +29,7 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
             <h2
                 className="
           mb-2 text-2xl md:text-3xl font-bold text-center
-          text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400
+          text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent
         "
             >
                 Professional Experience

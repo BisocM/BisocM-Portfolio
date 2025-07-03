@@ -33,15 +33,14 @@ export const experiences: IExperience[] = [
         ],
     },
     {
-        title: "Full-Stack Developer & Digital Marketing Strategist",
+        title: "Full-Stack Developer",
         company: "Brunel Talent Marketplace",
-        dateRange: "Mar 2025 – Present · 3 mos",
+        dateRange: "Mar 2025 – Present · 4 mos",
         location: "United Kingdom (Hybrid, Part-Time)",
         details: [
-            "Leading ongoing marketing campaigns to boost digital presence",
-            "Leading a team on an ambitious modernization project for IAG Cargo "
+            "Leading the transpilation efforts of a Java EE Legacy codebase from IAG Cargo",
         ],
         softSkills: ["Marketing", "Leadership", "Coordination", "Communication"],
-        technicalSkills: ["Python", "Java", "GitHub Actions", "CI/CD", "Python Tooling"],
+        technicalSkills: ["Python", "Java", "GitHub Actions", "CI/CD", "Python Tooling", "DevOps"],
     },
 ];

@@ -23,7 +23,7 @@ export default function App() {
             <main>
                 <HeroSection />
                 <SkillsSection />
-                <ProjectsSection achievements={projects} />
+                <ProjectsSection projects={projects} />
                 <CompaniesSection />
                 <ExperienceSection experiences={experiences} />
             </main>

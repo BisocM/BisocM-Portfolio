@@ -47,7 +47,7 @@ export default function CompaniesSection() {
             <h2
                 className="
           mb-6 text-2xl md:text-3xl font-bold text-center
-          text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400
+          text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent
         "
             >
                 My Clients

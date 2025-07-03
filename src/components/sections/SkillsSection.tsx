@@ -1,120 +1,111 @@
-import { motion, Variants } from "framer-motion";
-import { FaCogs, FaServer } from "react-icons/fa";
-import {
-    SiDotnet,
-    SiCplusplus,
-    SiJavascript,
-    SiDocker,
-    SiFramework,
-    SiGooglecloud,
-    SiKubernetes,
-    SiPostgresql,
-} from "react-icons/si";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { skills, featuredSkills, Skill } from "@/data/skills.tsx";
 
-interface LanguageBarProps {
-    language: string;
-    level: string;
-    percentage: number;
-}
-
-const container: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.2 } } };
-const item: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 120 } },
+const cardVariants = {
+    initial: { opacity: 0, y: 20, scale: 0.95 },
+    animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, ease: 'easeOut' } },
+    exit: { opacity: 0, y: -20, scale: 0.95, transition: { duration: 0.3, ease: 'easeIn' } },
 };
 
-function LanguageBar({ language, level, percentage }: LanguageBarProps) {
-    return (
-        <motion.div variants={item} className="space-y-1">
-            <div className="flex items-center justify-between">
-                <span className="font-medium">{language}</span>
-                <span className="text-gray-400">{level}</span>
-            </div>
-            <div className="bg-gray-200 dark:bg-gray-700 h-2 rounded overflow-hidden">
-                <motion.div
-                    className="bg-primary h-full"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${percentage}%` }}
-                    transition={{ duration: 1.2, ease: "easeOut" }}
-                    viewport={{ once: true }}
-                />
-            </div>
-        </motion.div>
-    );
-}
-
 export default function SkillsSection() {
+    const [selectedSkill, setSelectedSkill] = useState(featuredSkills[0]);
+    const [isHoverPaused, setIsHoverPaused] = useState(false);
+    const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+    useEffect(() => {
+        if (intervalRef.current) clearInterval(intervalRef.current);
+
+        if (!isHoverPaused) {
+            intervalRef.current = setInterval(() => {
+                setSelectedSkill(currentSkill => {
+                    const currentIndex = featuredSkills.findIndex(s => s.id === currentSkill.id);
+                    const nextIndex = (currentIndex + 1) % featuredSkills.length;
+                    return featuredSkills[nextIndex];
+                });
+            }, 5000); // Change skill every 5 seconds
+        }
+
+        return () => {
+            if (intervalRef.current) clearInterval(intervalRef.current);
+        };
+    }, [isHoverPaused]);
+
+    const handleMouseEnter = (skill: Skill) => {
+        if (skill.description) {
+            setSelectedSkill(skill);
+            setIsHoverPaused(true);
+        }
+    };
+
+    const handleMouseLeave = () => {
+        setIsHoverPaused(false);
+    };
+
     return (
-        <motion.section
-            id="skills"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={container}
-            className="py-12 px-4 md:px-8 bg-white dark:bg-darkBgAlt"
-        >
-            <div className="
-                mb-8 text-2xl md:text-3xl font-bold text-center
-                text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400
-            ">
-                Skills &amp; Proficiency
+        <section id="skills" className="py-16 px-4 md:px-8 bg-white dark:bg-darkBgAlt">
+            <div className="max-w-4xl mx-auto text-center">
+                <h2 className="
+                    mb-2 text-3xl md:text-4xl font-bold py-2
+                    text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent
+                ">
+                    Technologies
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    A showcase of my primary tools and areas of expertise.
+                </p>
+
+                {/* Main Display Area (Carousel) */}
+                <div className="relative min-h-[18rem] md:min-h-[14rem] mb-6 flex items-center justify-center">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={selectedSkill ? selectedSkill.id : 'empty'}
+                            variants={cardVariants}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                            className="w-full"
+                        >
+                            <div className="bg-gray-50 dark:bg-darkBg p-8 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 text-left">
+                                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedSkill.name}</h3>
+                                <p className={`text-md font-semibold mb-4 ${selectedSkill.levelColor}`}>{selectedSkill.level}</p>
+                                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                    {selectedSkill.description}
+                                </p>
+                            </div>
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
+
+                {/* Selector Grid */}
+                <div
+                    onMouseLeave={handleMouseLeave}
+                    className="flex flex-wrap justify-center gap-4"
+                >
+                    {skills.map((skill) => (
+                        <div
+                            key={skill.id}
+                            onMouseEnter={() => handleMouseEnter(skill)}
+                            className="cursor-pointer"
+                        >
+                            <div className={`
+                                p-4 bg-gray-100 dark:bg-darkBg rounded-lg
+                                transition-all duration-300 ease-in-out
+                                ${selectedSkill?.id === skill.id
+                                ? 'scale-110 ring-2 ring-primary shadow-lg'
+                                : 'scale-100 ring-0 hover:scale-105'}
+                            `}>
+                                <div className={`
+                                    text-gray-600 dark:text-gray-400 transition-colors duration-300
+                                    ${selectedSkill?.id === skill.id ? 'text-primary' : ''}
+                                `}>
+                                    {skill.icon}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
-            <motion.div variants={item} className="flex flex-col md:flex-row gap-8 max-w-5xl mx-auto">
-                {/* Core Development Stack */}
-                <div className="bg-white dark:bg-darkBg rounded-lg p-6 shadow-md flex-1">
-                    <h3 className="text-xl font-semibold text-purple-300 mb-4 flex items-center gap-2">
-                        <FaCogs /> Core Development Stack
-                    </h3>
-                    <div className="flex flex-wrap gap-3 text-sm">
-                        <div className="bg-gray-200 dark:bg-darkBgAlt px-3 py-1 rounded flex items-center gap-2">
-                            <SiDotnet className="text-primary" /> <span>C# (Expert)</span>
-                        </div>
-                        <div className="bg-gray-200 dark:bg-darkBgAlt px-3 py-1 rounded flex items-center gap-2">
-                            <SiCplusplus className="text-primary" /> <span>C/C++/ASM</span>
-                        </div>
-                        <div className="bg-gray-200 dark:bg-darkBgAlt px-3 py-1 rounded flex items-center gap-2">
-                            <SiJavascript className="text-primary" /> <span>JS/TS/React.js</span>
-                        </div>
-                        <div className="bg-gray-200 dark:bg-darkBgAlt px-3 py-1 rounded flex items-center gap-2">
-                            <FaServer className="text-primary" /> <span>Backend &amp; Embedded</span>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Cloud & Networking */}
-                <div className="bg-white dark:bg-darkBg rounded-lg p-6 shadow-md flex-1">
-                    <h3 className="text-xl font-semibold text-purple-300 mb-4 flex items-center gap-2">
-                        <SiDocker /> Cloud &amp; Networking
-                    </h3>
-                    <div className="flex flex-wrap gap-3 text-sm">
-                        <div className="bg-gray-200 dark:bg-darkBgAlt px-3 py-1 rounded flex items-center gap-2">
-                            <SiFramework className="text-primary" /> <span>NAT, VPLAN, AiMesh</span>
-                        </div>
-                        <div className="bg-gray-200 dark:bg-darkBgAlt px-3 py-1 rounded flex items-center gap-2">
-                            <SiGooglecloud className="text-primary" /> <span>Google Cloud, AWS</span>
-                        </div>
-                        <div className="bg-gray-200 dark:bg-darkBgAlt px-3 py-1 rounded flex items-center gap-1">
-                            <SiKubernetes className="text-primary" /> <span>K8 &amp; Docker</span>
-                        </div>
-                        <div className="bg-gray-200 dark:bg-darkBgAlt px-3 py-1 rounded flex items-center gap-1">
-                            <SiPostgresql className="text-primary" /> <span>PostgreSQL, MySQL, MongoDB</span>
-                        </div>
-                    </div>
-                </div>
-            </motion.div>
-
-            {/* Language Proficiency */}
-            <motion.div variants={item} className="mt-10 bg-white dark:bg-darkBg p-6 rounded-lg shadow-md max-w-3xl mx-auto">
-                <h3 className="text-xl font-semibold text-purple-300 mb-4 text-center">
-                    Language Proficiency
-                </h3>
-                <div className="space-y-4 text-sm">
-                    <LanguageBar language="English" level="Full Professional" percentage={95} />
-                    <LanguageBar language="Russian" level="Native/Bilingual" percentage={100} />
-                    <LanguageBar language="Georgian" level="Limited Working" percentage={50} />
-                    <LanguageBar language="German" level="Elementary" percentage={30} />
-                </div>
-            </motion.div>
-        </motion.section>
+        </section>
     );
 }

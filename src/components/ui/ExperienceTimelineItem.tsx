@@ -63,7 +63,7 @@ export default function ExperienceTimelineItem({
                 <div className="flex justify-between items-start">
                     {/* heading */}
                     <div>
-                        <h3 className="text-lg font-semibold text-purple-300 flex items-center gap-2">
+                        <h3 className="text-lg font-semibold text-accent flex items-center gap-2">
                             <FaBriefcase className="text-purple-400" />
                             {experience.title}
                         </h3>

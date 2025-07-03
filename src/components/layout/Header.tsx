@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { FaGithub } from 'react-icons/fa'
 import ThemeToggle from '@/components/ui/ThemeToggle'
 
-const NAV_ITEMS = ['Home', 'Skills', 'Achievements', 'Experience']
+const NAV_ITEMS = ['Home', 'Skills', 'Projects', 'Experience']
 
 export default function Header() {
     const [isMenuOpen, setMenuOpen] = useState(false)
@@ -16,6 +16,7 @@ export default function Header() {
                 flex items-center justify-between
                 px-6 py-4
                 shadow-md
+                border-b border-gray-200 dark:border-gray-800
                 animate-fadeIn duration-DEFAULT
             "
         >

@@ -1,5 +1,6 @@
 import { IExperience } from "@/data/experience";
 import { FaBriefcase } from "react-icons/fa";
+import { formatExperienceDate } from "@/utils/dates";
 import SkillPopover from "@/components/ui/SkillPopover";
 
 export interface ExperienceTimelineItemProps {
@@ -68,7 +69,7 @@ export default function ExperienceTimelineItem({
                             {experience.title}
                         </h3>
                         <p className="text-sm text-gray-600 dark:text-gray-300 italic">
-                            {experience.company} | {experience.dateRange}
+                            {experience.company} | {formatExperienceDate(experience)}
                         </p>
                         {experience.location && (
                             <p className="text-sm text-gray-600 dark:text-gray-300">

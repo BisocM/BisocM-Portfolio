@@ -1,7 +1,8 @@
 export interface IExperience {
     title: string;
     company: string;
-    dateRange: string;
+    startDate: string; // Format: YYYY-MM-DD
+    endDate: string | null; // null indicates "Present"
     location: string;
     details: string[];
     softSkills?: string[];
@@ -12,7 +13,8 @@ export const experiences: IExperience[] = [
     {
         title: "Software Developer and Prompt Engineer",
         company: "Brunel Talent Marketplace",
-        dateRange: "Jan 2025 – Mar 2025 · 3 mos",
+        startDate: "2025-01-01",
+        endDate: "2025-03-31",
         location: "United Kingdom (Hybrid, Part-Time)",
         details: [
             "Oversaw the design of a customizable application using LLM agents to generate detailed test cases",
@@ -35,12 +37,14 @@ export const experiences: IExperience[] = [
     {
         title: "Full-Stack Developer",
         company: "Brunel Talent Marketplace",
-        dateRange: "Mar 2025 – Present · 4 mos",
+        startDate: "2025-03-01",
+        endDate: null,
         location: "United Kingdom (Hybrid, Part-Time)",
         details: [
             "Leading the transpilation efforts of a Java EE Legacy codebase from IAG Cargo",
+            "Contributed in the development of an LLM approach to translation of legacy code"
         ],
         softSkills: ["Marketing", "Leadership", "Coordination", "Communication"],
-        technicalSkills: ["Python", "Java", "GitHub Actions", "CI/CD", "Python Tooling", "DevOps"],
+        technicalSkills: ["Python", "Java", "GitHub Actions", "CI/CD", "Python Tooling", "DevOps", "DDD", "SQLAlchemy", "Flask"],
     },
 ];

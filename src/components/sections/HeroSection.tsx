@@ -1,17 +1,20 @@
-import { motion, Variants } from "framer-motion";
+import {motion, Variants} from "framer-motion";
+import {useTranslation} from "react-i18next";
 
 const heroVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    hidden: {opacity: 0, y: 20},
+    visible: {opacity: 1, y: 0, transition: {duration: 0.8, ease: "easeOut"}},
 };
 
 export default function HeroSection() {
+    const {t} = useTranslation();
+
     return (
         <motion.section
             id="home"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
+            viewport={{once: true, amount: 0.1}}
             variants={heroVariants}
             className="
                 relative flex flex-col items-center text-center
@@ -34,11 +37,16 @@ export default function HeroSection() {
                     text-gray-900 dark:text-gray-200
                 "
             >
-                Backend Developer • Embedded Systems • Reverse Engineering
+                {/* Titles */}
+                {t('hero.title1')} • {t('hero.title2')} • {t('hero.title3')}
             </p>
 
             <div className="text-gray-500 dark:text-gray-400 text-sm font-medium">
-                Speaking: <span className="text-gray-700 dark:text-gray-200">Russian(Native)</span>, <span className="text-gray-700 dark:text-gray-200">English (Professional)</span> & <span className="text-gray-700 dark:text-gray-200">Georgian (Limited Working)</span>
+                {/* Speaking section */}
+                {t('hero.speaking')} <span
+                className="text-gray-700 dark:text-gray-200">{t('hero.languages.ru')}</span>, <span
+                className="text-gray-700 dark:text-gray-200">{t('hero.languages.en')}</span> & <span
+                className="text-gray-700 dark:text-gray-200">{t('hero.languages.ge')}</span>
             </div>
         </motion.section>
     );

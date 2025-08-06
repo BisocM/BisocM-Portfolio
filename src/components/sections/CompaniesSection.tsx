@@ -1,34 +1,37 @@
-import { useEffect, useRef } from "react";
-import { companies, ICompany } from "@/data/companies";
+import {useEffect, useRef} from "react";
+import {companies, ICompany} from "@/data/companies";
+import {useTranslation} from "react-i18next";
 
 export default function CompaniesSection() {
-    /* duplicate once for seamless wrap-around */
+    const {t} = useTranslation();
+
     const loop: ICompany[] = [...companies, ...companies];
     const stripRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        // Animation logic remains unchanged
         const strip = stripRef.current;
         if (!strip) return;
 
-        /* current translateX (negative, moving left) */
+
         let x = 0;
         const speed = 0.3;
         let frameId = 0;
 
-        /* single set width (before duplication) */
+
         const singleWidth =
             strip.scrollWidth / 2 || strip.getBoundingClientRect().width;
 
         const step = () => {
             x -= speed;
-            /* when we've moved a full set leftward, jump forward */
+
             if (-x >= singleWidth) x += singleWidth;
             strip.style.transform = `translateX(${x}px)`;
 
             frameId = requestAnimationFrame(step);
         };
 
-        /* start animation, handle hover pause */
+
         frameId = requestAnimationFrame(step);
         const pause = () => cancelAnimationFrame(frameId);
         const resume = () => (frameId = requestAnimationFrame(step));
@@ -50,12 +53,12 @@ export default function CompaniesSection() {
           text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent
         "
             >
-                My Clients
+                {t('companiesSection.title')}
             </h2>
 
-            {/* 24 rem viewport → ~3×8 rem logo slots */}
+            {/* Carousel implementation remains the same */}
             <div className="relative w-[24rem] mx-auto overflow-hidden">
-                {/* scrolling strip (flex, duplicated content) */}
+                {}
                 <div
                     ref={stripRef}
                     className="flex whitespace-nowrap will-change-transform"
@@ -75,7 +78,7 @@ export default function CompaniesSection() {
                     ))}
                 </div>
 
-                {/* edge fades */}
+                {}
                 <div
                     className="
             pointer-events-none absolute inset-y-0 left-0 w-16 z-20

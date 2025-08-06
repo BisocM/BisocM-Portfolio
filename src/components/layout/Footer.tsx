@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
-import { FaArrowUp, FaEnvelope } from "react-icons/fa";
+import {useEffect, useState} from "react";
+import {FaArrowUp, FaEnvelope} from "react-icons/fa";
+import {useTranslation} from "react-i18next";
 
 export default function Footer() {
     const [showButton, setShowButton] = useState(false);
+    const {t} = useTranslation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -12,7 +14,7 @@ export default function Footer() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+    const scrollToTop = () => window.scrollTo({top: 0, behavior: "smooth"});
 
     return (
         <footer
@@ -23,6 +25,7 @@ export default function Footer() {
                 animate-fadeIn duration-DEFAULT
             "
         >
+            {/* Email link */}
             <div className="mb-2">
                 <a
                     href="mailto:bisocc.m@gmail.com"
@@ -31,10 +34,11 @@ export default function Footer() {
                         flex items-center justify-center gap-1
                     "
                 >
-                    <FaEnvelope /> bisocc.m@gmail.com
+                    <FaEnvelope/> bisocc.m@gmail.com
                 </a>
             </div>
-            <div>&copy; {new Date().getFullYear()} BisocM. All rights reserved.</div>
+            {/* Copyright text */}
+            <div>&copy; {new Date().getFullYear()} BisocM. {t('common.allRightsReserved')}</div>
             {showButton && (
                 <button
                     onClick={scrollToTop}
@@ -43,9 +47,9 @@ export default function Footer() {
                         bg-primary text-white p-3 rounded-full shadow-lg
                         transition-opacity duration-DEFAULT hover:opacity-80
                     "
-                    title="Back to Top"
+                    title={t('common.backToTop')}
                 >
-                    <FaArrowUp />
+                    <FaArrowUp/>
                 </button>
             )}
         </footer>

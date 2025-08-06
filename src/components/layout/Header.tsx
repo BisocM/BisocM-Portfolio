@@ -1,11 +1,14 @@
-import { useState } from 'react'
-import { FaGithub } from 'react-icons/fa'
+import {useState} from 'react'
+import {FaGithub} from 'react-icons/fa'
 import ThemeToggle from '@/components/ui/ThemeToggle'
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
+import {useTranslation} from 'react-i18next';
 
-const NAV_ITEMS = ['Home', 'Skills', 'Projects', 'Experience']
+const NAV_KEYS = ['home', 'skills', 'projects', 'experience']
 
 export default function Header() {
     const [isMenuOpen, setMenuOpen] = useState(false)
+    const {t} = useTranslation();
 
     return (
         <header
@@ -27,22 +30,23 @@ export default function Header() {
                     border-b-2 border-transparent hover:border-primary
                 "
             >
-                Portfolio
+                {t('common.portfolio')}
             </div>
 
-            {/* Desktop Navigation */}
+            {}
             <nav className="hidden md:flex space-x-6">
-                {NAV_ITEMS.map((section) => (
+                {NAV_KEYS.map((key) => (
                     <a
-                        key={section}
-                        href={`#${section.toLowerCase()}`}
+                        key={key}
+                        href={`#${key}`}
                         className="
                             text-gray-900 dark:text-gray-300 hover:text-primary transition-colors duration-DEFAULT
                             relative group
                         "
                         aria-current={false}
                     >
-                        {section}
+                        {/* Translate navigation key */}
+                        {t(`nav.${key}`)}
                         <span
                             className="
                                 absolute left-0 bottom-[-2px] w-0 h-[2px] bg-primary
@@ -53,9 +57,9 @@ export default function Header() {
                 ))}
             </nav>
 
-            {/* Theme Toggle & GitHub Link */}
+            {}
             <div className="hidden md:flex items-center space-x-4">
-                <ThemeToggle />
+                <ThemeToggle/>
                 <a
                     href="https://github.com/BisocM"
                     target="_blank"
@@ -65,30 +69,36 @@ export default function Header() {
                         hover:text-primary transition-transform duration-DEFAULT
                         hover:rotate-12
                     "
-                    title="GitHub Profile"
+                    title={t('nav.githubProfile')}
                 >
-                    <FaGithub />
+                    <FaGithub/>
                 </a>
+                <LanguageSwitcher/>
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center">
+            {}
+            {/* Mobile menu button */}
+            <div className="md:hidden flex items-center space-x-4">
+                <LanguageSwitcher/>
                 <button
                     onClick={() => setMenuOpen(!isMenuOpen)}
                     className="text-gray-900 dark:text-gray-300 hover:text-primary transition-colors duration-DEFAULT focus:outline-none"
-                    aria-label="Toggle Navigation Menu"
+                    aria-label={t('nav.toggleMenu')}
                 >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         {isMenuOpen ? (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                  d="M6 18L18 6M6 6l12 12"/>
                         ) : (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                  d="M4 6h16M4 12h16M4 18h16"/>
                         )}
                     </svg>
                 </button>
             </div>
 
-            {/* Mobile Dropdown */}
+            {}
+            {/* Mobile navigation drawer */}
             {isMenuOpen && (
                 <nav
                     className="
@@ -96,12 +106,13 @@ export default function Header() {
                         bg-white dark:bg-darkBg
                         flex flex-col items-center py-4
                         animate-slideDown duration-DEFAULT
+                        shadow-md
                     "
                 >
-                    {NAV_ITEMS.map((section) => (
+                    {NAV_KEYS.map((key) => (
                         <a
-                            key={section}
-                            href={`#${section.toLowerCase()}`}
+                            key={key}
+                            href={`#${key}`}
                             onClick={() => setMenuOpen(false)}
                             className="
                                 text-gray-900 dark:text-gray-300 hover:text-primary transition-colors duration-DEFAULT
@@ -109,7 +120,7 @@ export default function Header() {
                             "
                             aria-current={false}
                         >
-                            {section}
+                            {t(`nav.${key}`)}
                             <span
                                 className="
                                     absolute left-0 bottom-[-2px] w-0 h-[2px] bg-primary
@@ -119,7 +130,7 @@ export default function Header() {
                         </a>
                     ))}
                     <div className="mt-4">
-                        <ThemeToggle />
+                        <ThemeToggle/>
                     </div>
                 </nav>
             )}

@@ -1,14 +1,16 @@
-import { IProject, ITag } from "@/data/projects";
+import {IProject, ITag} from "@/data/projects";
+import {useTranslation} from "react-i18next";
 
 export default function ProjectCard({
                                         title,
-                                        description,
+                                        descriptionKey,
                                         link,
                                         imgSrc,
                                         tags,
                                     }: IProject) {
+    const {t} = useTranslation();
+
     const handleTagClick = (tag: ITag) => {
-        // If tag.url is provided, use it; otherwise fallback to a Wikipedia lookup
         const slug = tag.name.replace(/\s+/g, "_");
         const destination = tag.url ?? `https://en.wikipedia.org/wiki/${encodeURIComponent(slug)}`;
         window.open(destination, "_blank");
@@ -27,7 +29,8 @@ export default function ProjectCard({
                 snap-center
             "
         >
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 opacity-0 group-hover:opacity-20 transition-opacity duration-DEFAULT pointer-events-none" />
+            <div
+                className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 opacity-0 group-hover:opacity-20 transition-opacity duration-DEFAULT pointer-events-none"/>
             <div className="relative z-10 flex flex-col h-full">
                 <div className="relative h-40 overflow-hidden rounded-t-lg">
                     <img
@@ -36,7 +39,8 @@ export default function ProjectCard({
                         loading="lazy"
                         className="h-full w-full object-cover transition-transform duration-DEFAULT ease-in-out group-hover:scale-110 group-hover:rotate-1"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black opacity-0 group-hover:opacity-30 transition-opacity duration-DEFAULT" />
+                    <div
+                        className="absolute inset-0 bg-gradient-to-t from-black opacity-0 group-hover:opacity-30 transition-opacity duration-DEFAULT"/>
                 </div>
                 <div className="p-4 flex-1 flex flex-col justify-between">
                     <div>
@@ -54,10 +58,11 @@ export default function ProjectCard({
                 group-hover:translate-x-1 transition-all duration-DEFAULT
               "
                         >
-                            {description}
+                            {/* Translate descriptionKey */}
+                            {t(descriptionKey)}
                         </p>
 
-                        {/* Clickable tag buttons */}
+                        {/* Tags remain the same */}
                         <div className="flex flex-wrap gap-2 mb-4">
                             {tags.map((tag) => (
                                 <button
@@ -88,7 +93,7 @@ export default function ProjectCard({
                           group-hover:text-indigo-200 transition-colors duration-DEFAULT
                         "
                     >
-                        View More
+                        {t('common.viewMore')}
                     </a>
                 </div>
             </div>

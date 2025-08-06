@@ -5,7 +5,7 @@ export interface ITag {
 
 export interface IProject {
     title: string;
-    description: string;
+    descriptionKey: string;
     link: string;
     imgSrc: string;
     tags: ITag[];
@@ -14,8 +14,7 @@ export interface IProject {
 export const projects: IProject[] = [
     {
         title: "CQRSharp",
-        description:
-            "An open-source, lightweight, and attribute-driven CQRS framework for .NET applications.",
+        descriptionKey: "projects.cqrsharp.description",
         link: "https://github.com/BisocM/CQRSharp",
         imgSrc:
             "https://imagedelivery.net/yMVZazkXH-qQOiCSpkNtBA/eb96108a-3d9d-426a-f10e-cde5a420e300/public",
@@ -44,8 +43,7 @@ export const projects: IProject[] = [
     },
     {
         title: "RykeShell",
-        description:
-            "A custom Unix shell built entirely in C++, offering users a powerful command-line experience.",
+        descriptionKey: "projects.rykeshell.description",
         link: "https://github.com/BisocM/RykeShell",
         imgSrc:
             "https://imagedelivery.net/yMVZazkXH-qQOiCSpkNtBA/2ee5b2a0-a876-4e04-e17a-c4daef7af800/public",
@@ -70,8 +68,7 @@ export const projects: IProject[] = [
     },
     {
         title: "ScrabbleSharp",
-        description:
-            "A React application with an ASP.NET backend. Built in a day, used for solving Scrabble puzzles.",
+        descriptionKey: "projects.scrabblesharp.description",
         link: "https://scrabble-sharp.bisocm.org",
         imgSrc: "https://imagedelivery.net/yMVZazkXH-qQOiCSpkNtBA/f9003943-c104-45c3-700f-c920227c1100/public",
         tags: [
@@ -99,8 +96,7 @@ export const projects: IProject[] = [
     },
     {
         title: "UnlimitedMages",
-        description:
-            "A simple BepInEx mod to increase the total permitted number of players in a Mage Arena lobby.",
+        descriptionKey: "projects.unlimitedmages.description",
         link: "https://github.com/BisocM/UnlimitedMages",
         imgSrc: "https://github.com/BisocM/UnlimitedMages/blob/master/icon.png?raw=true",
         tags: [

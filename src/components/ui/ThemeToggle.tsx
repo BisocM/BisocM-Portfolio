@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
-import { FaSun, FaMoon } from 'react-icons/fa'
+import {useEffect, useState} from 'react'
+import {FaMoon, FaSun} from 'react-icons/fa'
+import {useTranslation} from 'react-i18next';
 
 export default function ThemeToggle() {
     const [theme, setTheme] = useState<'light' | 'dark'>('light')
+    const {t} = useTranslation();
 
-    //On mount: read stored preference or system setting
     useEffect(() => {
         const stored = localStorage.getItem('theme')
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -33,8 +34,8 @@ export default function ThemeToggle() {
     return (
         <button
             onClick={toggleTheme}
-            aria-label="Toggle Dark Mode"
-            className="text-gray-300 hover:text-primary transition-colors duration-DEFAULT"
+            aria-label={t('theme.toggleDarkMode')}
+            className="text-gray-900 dark:text-gray-300 hover:text-primary transition-colors duration-DEFAULT"
         >
             {theme === 'dark' ? <FaSun size={18} /> : <FaMoon size={18} />}
         </button>

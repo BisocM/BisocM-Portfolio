@@ -1,28 +1,28 @@
 export interface IExperience {
-    title: string;
+    titleKey: string;
     company: string;
     startDate: string; // Format: YYYY-MM-DD
     endDate: string | null; // null indicates "Present"
-    location: string;
-    details: string[];
-    softSkills?: string[];
+    locationKey: string;
+    detailsKeys: string[];
+    softSkillsKeys?: string[];
     technicalSkills?: string[];
 }
 
 export const experiences: IExperience[] = [
     {
-        title: "Software Developer and Prompt Engineer",
+        titleKey: "experience.brunel1.title",
         company: "Brunel Talent Marketplace",
         startDate: "2025-01-01",
         endDate: "2025-03-31",
-        location: "United Kingdom (Hybrid, Part-Time)",
-        details: [
-            "Oversaw the design of a customizable application using LLM agents to generate detailed test cases",
-            "Implemented innovative solutions to streamline the test case generation process",
-            "Collaborated with cross-functional teams to ensure high-quality standards",
-            "Adopted SCRUM methodologies for agile project management",
+        locationKey: "experience.location.ukHybridPartTime",
+        detailsKeys: [
+            "experience.brunel1.details.0",
+            "experience.brunel1.details.1",
+            "experience.brunel1.details.2",
+            "experience.brunel1.details.3",
         ],
-        softSkills: ["Scrum", "Communication", "Leadership", "Collaboration"],
+        softSkillsKeys: ["skills.soft.scrum", "skills.soft.communication", "skills.soft.leadership", "skills.soft.collaboration"],
         technicalSkills: [
             "Software Infrastructure",
             "Software Design",
@@ -35,16 +35,16 @@ export const experiences: IExperience[] = [
         ],
     },
     {
-        title: "Full-Stack Developer",
+        titleKey: "experience.brunel2.title",
         company: "Brunel Talent Marketplace",
         startDate: "2025-03-01",
         endDate: null,
-        location: "United Kingdom (Hybrid, Part-Time)",
-        details: [
-            "Leading the transpilation efforts of a Java EE Legacy codebase from IAG Cargo",
-            "Contributed in the development of an LLM approach to translation of legacy code"
+        locationKey: "experience.location.ukHybridPartTime",
+        detailsKeys: [
+            "experience.brunel2.details.0",
+            "experience.brunel2.details.1"
         ],
-        softSkills: ["Marketing", "Leadership", "Coordination", "Communication"],
+        softSkillsKeys: ["skills.soft.marketing", "skills.soft.leadership", "skills.soft.coordination", "skills.soft.communication"],
         technicalSkills: ["Python", "Java", "GitHub Actions", "CI/CD", "Python Tooling", "DevOps", "DDD", "SQLAlchemy", "Flask"],
     },
 ];

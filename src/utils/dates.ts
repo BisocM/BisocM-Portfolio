@@ -1,28 +1,28 @@
-import { IExperience } from "@/data/experience.ts";
+import {IExperience} from "@/data/experience.ts";
+import {TFunction} from "i18next";
 
-export const formatExperienceDate = (experience: IExperience): string => {
-    const { startDate, endDate } = experience;
+export const formatExperienceDate = (experience: IExperience, t: TFunction, locale: string = 'en-US'): string => {
+    const {startDate, endDate} = experience;
     const start = new Date(startDate);
-    // Use the provided end date, or the current date for "Present" jobs
+
     const end = endDate ? new Date(endDate) : new Date();
 
     const options: Intl.DateTimeFormatOptions = {
         year: "numeric",
         month: "short",
     };
-    const startDateString = start.toLocaleDateString("en-US", options);
+    // Use the provided locale for date formatting
+    const startDateString = start.toLocaleDateString(locale, options);
 
-    // Display "Present" for ongoing roles, or the formatted end date for completed ones
+    // Use translation for "Present"
     const endDateString = endDate
-        ? end.toLocaleDateString("en-US", options)
-        : "Present";
+        ? end.toLocaleDateString(locale, options)
+        : t('dates.present');
 
-    // Don't show a duration for roles that haven't started yet
     if (!endDate && start > end) {
         return `${startDateString} – ${endDateString}`;
     }
 
-    // Calculate the duration in years and months
     const totalMonths =
         (end.getFullYear() - start.getFullYear()) * 12 +
         (end.getMonth() - start.getMonth()) +
@@ -32,22 +32,19 @@ export const formatExperienceDate = (experience: IExperience): string => {
 
     let durationString = "";
     if (years > 0) {
-        durationString += `${years} yr${years > 1 ? "s" : ""} `;
+        durationString += `${years} ${t('dates.year', {count: years})} `;
     }
     if (months > 0) {
-        durationString += `${months} mo${months > 1 ? "s" : ""}`;
+        durationString += `${months} ${t('dates.month', {count: months})}`;
     }
 
-    // Handle cases where the duration is less than a month
     if (durationString.trim() === "" && totalMonths > 0) {
-        durationString = "1 mo";
+        durationString = `1 ${t('dates.month', {count: 1})}`;
     }
 
-    // If there's a valid duration, append it to the date range
     if (durationString.trim()) {
         return `${startDateString} – ${endDateString} · ${durationString.trim()}`;
     }
 
-    // Otherwise, just show the date range
     return `${startDateString} – ${endDateString}`;
 };

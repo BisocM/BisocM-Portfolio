@@ -6,8 +6,8 @@ import ExperienceSection from "@/components/sections/ExperienceSection";
 import CompaniesSection from "@/components/sections/CompaniesSection";
 import Footer from "@/components/layout/Footer";
 
-import { projects } from "./data/projects";
-import { experiences } from "./data/experience";
+import {projects} from "./data/projects";
+import {experiences} from "./data/experience";
 
 export default function App() {
     return (
@@ -19,15 +19,15 @@ export default function App() {
                 font-sans overflow-x-hidden
             "
         >
-            <Header />
+            <Header/>
             <main>
-                <HeroSection />
-                <SkillsSection />
-                <ProjectsSection projects={projects} />
-                <CompaniesSection />
-                <ExperienceSection experiences={experiences} />
+                <HeroSection/>
+                <SkillsSection/>
+                <ProjectsSection projects={projects}/>
+                <CompaniesSection/>
+                <ExperienceSection experiences={experiences}/>
             </main>
-            <Footer />
+            <Footer/>
         </div>
     );
 }

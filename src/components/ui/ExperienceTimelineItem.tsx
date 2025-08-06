@@ -1,13 +1,14 @@
-import { IExperience } from "@/data/experience";
-import { FaBriefcase } from "react-icons/fa";
-import { formatExperienceDate } from "@/utils/dates";
+import {IExperience} from "@/data/experience";
+import {FaBriefcase} from "react-icons/fa";
+import {formatExperienceDate} from "@/utils/dates";
 import SkillPopover from "@/components/ui/SkillPopover";
+import {useTranslation} from "react-i18next";
 
 export interface ExperienceTimelineItemProps {
     experience: IExperience;
-    /** most-recent entry (top of the list) */
+
     isFirst?: boolean;
-    /** earliest entry (bottom of the list) */
+
     isLast?: boolean;
 }
 
@@ -16,25 +17,27 @@ export default function ExperienceTimelineItem({
                                                    isFirst = false,
                                                    isLast = false,
                                                }: ExperienceTimelineItemProps) {
-    const { softSkills = [], technicalSkills = [] } = experience;
+    const {t, i18n} = useTranslation();
+    const {softSkillsKeys = [], technicalSkills = []} = experience;
 
-    /* ---------------- vertical connector ---------------- */
+
+    // connector and dotY logic
     let connector = "";
     if (isFirst) {
-        /* start exactly at the dot’s top (1.5 rem) and run down */
+
         connector =
             "before:absolute before:left-3 before:top-6 before:bottom-0 before:w-px before:bg-gray-600 dark:before:bg-gray-400";
     } else if (isLast) {
-        /* run from card top to the dot’s centre */
+
         connector =
             "before:absolute before:left-3 before:top-0 before:bottom-1/2 before:w-px before:bg-gray-600 dark:before:bg-gray-400";
     } else {
-        /* middle cards: full height */
+
         connector =
             "before:absolute before:left-3 before:top-0 before:bottom-0 before:w-px before:bg-gray-600 dark:before:bg-gray-400";
     }
 
-    /* ---------------- dot placement -------------------- */
+
     const dotY = isFirst
         ? "top-6"                     // flush with card top
         : isLast
@@ -43,7 +46,7 @@ export default function ExperienceTimelineItem({
 
     return (
         <div className={`relative pl-8 py-6 group ${connector}`}>
-            {/* timeline dot, horizontally centred on the line */}
+            {/* Dot visualization */}
             <div
                 className={`
           absolute left-3 -translate-x-1/2 ${dotY}
@@ -52,67 +55,53 @@ export default function ExperienceTimelineItem({
         `}
             />
 
-            {/* card body (scales on hover only) */}
+            {/* Card content */}
             <div
-                className="
-          bg-white dark:bg-cardBg p-4 ml-3
-          rounded-lg shadow-lg ring-1 ring-gray-200 dark:ring-gray-700
-          transition transform-gpu duration-200
-          group-hover:scale-[1.01] group-hover:shadow-2xl
-        "
-            >
+                className="bg-white dark:bg-cardBg p-4 ml-3 rounded-lg shadow-lg ring-1 ring-gray-200 dark:ring-gray-700 transition transform-gpu duration-200 group-hover:scale-[1.01] group-hover:shadow-2xl">
                 <div className="flex justify-between items-start">
-                    {/* heading */}
+                    {}
                     <div>
                         <h3 className="text-lg font-semibold text-accent flex items-center gap-2">
-                            <FaBriefcase className="text-purple-400" />
-                            {experience.title}
+                            <FaBriefcase className="text-purple-400"/>
+                            {t(experience.titleKey)}
                         </h3>
                         <p className="text-sm text-gray-600 dark:text-gray-300 italic">
-                            {experience.company} | {formatExperienceDate(experience)}
+                            {/* Pass t and locale to formatExperienceDate */}
+                            {experience.company} | {formatExperienceDate(experience, t, i18n.language)}
                         </p>
-                        {experience.location && (
+                        {experience.locationKey && (
                             <p className="text-sm text-gray-600 dark:text-gray-300">
-                                <strong>Location:</strong> {experience.location}
+                                <strong>{t('common.location')}:</strong> {t(experience.locationKey)}
                             </p>
                         )}
                     </div>
 
-                    {/* skill chips */}
+                    {/* Skills Popovers */}
                     <div className="flex flex-col items-end space-y-1">
-                        {softSkills.length > 0 && (
-                            <SkillPopover title="Soft" small>
+                        {softSkillsKeys.length > 0 && (
+                            // Translate Popover title
+                            <SkillPopover title={t('skills.soft.title')} small>
                                 <div className="flex flex-wrap gap-1">
-                                    {softSkills.map((s, i) => (
+                                    {softSkillsKeys.map((sKey, i) => (
                                         <span
                                             key={i}
-                                            className="
-                        bg-purple-200 dark:bg-purple-800
-                        text-purple-900 dark:text-purple-100
-                        text-xs font-semibold px-2 py-1 rounded-full
-                      "
-                                        >
-                      {s}
-                    </span>
+                                            className=" bg-purple-200 dark:bg-purple-800 text-purple-900 dark:text-purple-100 text-xs font-semibold px-2 py-1 rounded-full ">
+                                            {t(sKey)}
+                                        </span>
                                     ))}
                                 </div>
                             </SkillPopover>
                         )}
 
                         {technicalSkills.length > 0 && (
-                            <SkillPopover title="Tech" small>
+                            // Translate Popover title
+                            <SkillPopover title={t('skills.tech.title')} small>
                                 <div className="flex flex-wrap gap-1">
+                                    {/* Technical skills are not translated */}
                                     {technicalSkills.map((s, i) => (
                                         <span
                                             key={i}
-                                            className="
-                        bg-gray-300 dark:bg-gray-700
-                        text-gray-900 dark:text-gray-100
-                        text-xs font-semibold px-2 py-1 rounded-full
-                      "
-                                        >
-                      {s}
-                    </span>
+                                            className="bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-xs font-semibold px-2 py-1 rounded-full"> {s} </span>
                                     ))}
                                 </div>
                             </SkillPopover>
@@ -120,10 +109,10 @@ export default function ExperienceTimelineItem({
                     </div>
                 </div>
 
-                {/* bullet list */}
+                {/* Details list */}
                 <ul className="text-sm leading-relaxed text-gray-800 dark:text-gray-200 mt-3 list-disc list-inside space-y-1">
-                    {experience.details.map((d, i) => (
-                        <li key={i}>{d}</li>
+                    {experience.detailsKeys.map((dKey, i) => (
+                        <li key={i}>{t(dKey)}</li>
                     ))}
                 </ul>
             </div>

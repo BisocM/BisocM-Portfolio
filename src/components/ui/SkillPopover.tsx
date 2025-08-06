@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { FiChevronDown } from "react-icons/fi";
+import {useEffect, useRef, useState} from "react";
+import {FiChevronDown} from "react-icons/fi";
 
 interface SkillPopoverProps {
     title: string;
@@ -7,7 +7,7 @@ interface SkillPopoverProps {
     small?: boolean;
 }
 
-export default function SkillPopover({ title, children, small }: SkillPopoverProps) {
+export default function SkillPopover({title, children, small}: SkillPopoverProps) {
     const [open, setOpen] = useState(false);
     const popoverRef = useRef<HTMLDivElement>(null);
 
@@ -17,6 +17,7 @@ export default function SkillPopover({ title, children, small }: SkillPopoverPro
                 setOpen(false);
             }
         }
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
